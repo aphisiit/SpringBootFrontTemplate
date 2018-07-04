@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /SPT
+    path: /
+spring:
+  mvc:
+    static-path-pattern: /META-INF/resources/
+    view:
+      prefix: /WEB-INF/**/
+      suffix: .jspx
+    favicon:
+      enabled: true
+
+EngineServer : http://localhost:9090/BACK

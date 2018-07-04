@@ -1,0 +1,50 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:tiles="http://tiles.apache.org/tags-tiles" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" >
+
+<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
+
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+<jsp:directive.page pageEncoding="UTF-8" />
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="PRAGMA" content="NO-CACHE" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <util:load-scripts/>
+    <title>Training Spring Boot</title>
+
+
+</head>
+
+<body class="container-fluid" >
+
+<tiles:insertAttribute name="header" ignore="true" />
+<div style="background-color:#ffffff" >
+    <!-- Push Wrapper -->
+    <div   style="padding-top: 0px; ">
+        <!--<tiles:insertAttribute name="menu" ignore="true" />-->
+        <!--<div class="scroller">&lt;!&ndash; this is for emulating position fixed of the nav &ndash;&gt;-->
+        <!--<div class="scroller-inner">-->
+        <tiles:insertAttribute name="body"/>
+
+
+    </div><!-- /pusher -->
+
+    <tiles:insertAttribute name="footer" ignore="true"/>
+
+
+</div><!-- /container -->
+
+
+
+
+<tiles:insertAttribute name="plugin" ignore="true"/>
+
+</body>
+
+
+
+</html>
