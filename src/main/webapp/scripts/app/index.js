@@ -60,7 +60,8 @@ function loadData(){
                         );
 
                         window.setTimeout(function () {
-                            Custombox.modal.close()
+                            // Custombox.modal.close()
+                            $('#exampleModal').modal('show');
                         },3000)
                     }
                 }
@@ -100,7 +101,16 @@ function findByFirstNameIgnoreCaseContaining() {
                             );
                         }
                     }else{
-                        modal.open();
+                        // modal.open();
+                        // $('#exampleModal').modal('show');
+                        swal ({
+                            title: $LABEL_ALERT,
+                            text : $MESSAGE_NO_DATA,
+                            icon : "warning",
+                            buttons : false,
+                            dangerMode : true
+                        })
+
                         $('#bodyTable').empty().append(
                             '<tr>' +
                                 '<td colspan="4" style="text-align: center;">' + $MESSAGE_NO_DATA + '</td>'+
@@ -108,7 +118,9 @@ function findByFirstNameIgnoreCaseContaining() {
                         );
 
                         window.setTimeout(function () {
-                            Custombox.modal.close()
+                            // Custombox.modal.close()
+                            // $('#exampleModal').modal('hide');
+                            swal.close();
                         },3000)
                     }
                 }
