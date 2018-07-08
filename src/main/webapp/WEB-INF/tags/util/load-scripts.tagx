@@ -16,11 +16,13 @@
     <spring:url value="/scripts/bootstrap.min.js" 			var="bootstrap_js_url" />
     <spring:url value="/scripts/custombox.min.js" 			var="custombox_js_url" />
     <spring:url value="/scripts/custombox.legacy.min.js" 			var="custombox_legacy_js_url" />
+    <spring:url value="/scripts/sweetalert.min.js" 			var="sweetalert_js_url" />
 
     <script src="${jquery_js_url}" 				type="text/javascript"><!-- required for FF3 and Opera --></script>
     <script src="${bootstrap_js_url}" 				type="text/javascript"><!-- required for FF3 and Opera --></script>
     <script src="${custombox_js_url}" 				type="text/javascript"><!-- required for FF3 and Opera --></script>
     <script src="${custombox_legacy_js_url}" 				type="text/javascript"><!-- required for FF3 and Opera --></script>
+    <script src="${sweetalert_js_url}" 				type="text/javascript"><!-- required for FF3 and Opera --></script>
 
 </jsp:root>
 
