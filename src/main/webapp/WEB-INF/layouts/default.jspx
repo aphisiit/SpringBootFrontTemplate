@@ -1,50 +1,79 @@
 <html xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:tiles="http://tiles.apache.org/tags-tiles" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" >
 
-<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
+    <jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
 
-<jsp:directive.page contentType="text/html;charset=UTF-8" />
-<jsp:directive.page pageEncoding="UTF-8" />
+    <jsp:directive.page contentType="text/html;charset=UTF-8" />
+    <jsp:directive.page pageEncoding="UTF-8" />
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <meta http-equiv="PRAGMA" content="NO-CACHE" />
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <util:load-scripts/>
-    <title>Training Spring Boot</title>
-
-
-</head>
-
-<body class="container-fluid" >
-
-<tiles:insertAttribute name="header" ignore="true" />
-<div style="background-color:#ffffff" >
-    <!-- Push Wrapper -->
-    <div   style="padding-top: 0px; ">
-        <!--<tiles:insertAttribute name="menu" ignore="true" />-->
-        <!--<div class="scroller">&lt;!&ndash; this is for emulating position fixed of the nav &ndash;&gt;-->
-        <!--<div class="scroller-inner">-->
-        <tiles:insertAttribute name="body"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <util:load-scripts/>
+        <title>Training Spring Boot</title>
 
 
-    </div><!-- /pusher -->
+        <style>
+            .lds-ring {
+                display: inline-block;
+                position: relative;
+                width: 100%;
+                height: 100%;
+                z-index: 500;
+            }
+            .lds-ring div {
+                box-sizing: border-box;
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 100px;
+                height: 100px;
+                margin: 6px;
+                border: 15px solid #cef;
+                border-radius: 50%;
+                animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+                border-color: #cef transparent transparent transparent;
+            }
+            .lds-ring div:nth-child(1) {
+                animation-delay: -0.45s;
+            }
+            .lds-ring div:nth-child(2) {
+                animation-delay: -0.3s;
+            }
+            .lds-ring div:nth-child(3) {
+                animation-delay: -0.15s;
+            }
+            @keyframes lds-ring {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
 
-    <tiles:insertAttribute name="footer" ignore="true"/>
-
-
-</div><!-- /container -->
-
-
-
-
-<tiles:insertAttribute name="plugin" ignore="true"/>
-
-</body>
-
-
-
+    <div class="lds-ring" style="position: absolute; background-color: rgba(52,0,23,0.17); display: none;"><div><jsp:text/></div><div><jsp:text/></div><div><jsp:text/></div><div><jsp:text/></div></div>
+    <body class="tundra spring" >
+        <tiles:insertAttribute name="header" ignore="true" />
+        <div class="container-mp" style="background-color:#ffffff" >
+            <!-- Push Wrapper -->
+            <div style="padding-top: 0px;">
+                <tiles:insertAttribute name="menu" ignore="true" />
+                <div class="scroller"><!-- this is for emulating position fixed of the nav -->
+                    <div class="scroller-inner">
+                        <tiles:insertAttribute name="body"/>
+                        <tiles:insertAttribute name="footer" ignore="true"/>
+                    </div>
+                </div>
+            </div><!-- /pusher -->
+        </div><!-- /container -->
+        <tiles:insertAttribute name="plugin" ignore="true"/>
+    </body>
 </html>
