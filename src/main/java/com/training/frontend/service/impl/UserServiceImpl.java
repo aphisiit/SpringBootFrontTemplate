@@ -6,10 +6,7 @@ import com.training.frontend.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -60,7 +57,9 @@ public class UserServiceImpl extends AbstractBackendService implements UserServi
 
     @Override
     public ResponseEntity<String> delete(Long id) {
-        return null;
+        String url = "/userCustom/deleteById/" + id;
+        ResponseEntity entity = deleteSend(HttpMethod.DELETE,url);
+        return entity;
     }
 
     @Override
@@ -80,5 +79,12 @@ public class UserServiceImpl extends AbstractBackendService implements UserServi
 
         ResponseEntity<String> entity1 =  getResultString(url,entity);
         return  entity1;
+    }
+
+    @Override
+    public ResponseEntity<String> findById(Long id) {
+        String url = "/userCustom/" + id;
+        ResponseEntity entity = postWithJson(null,HttpMethod.POST,url);
+        return entity;
     }
 }

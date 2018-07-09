@@ -8,11 +8,14 @@
 
     <!--Message i18n-->
     <c:set scope="request" var="MESSAGE_NO_DATA"><spring:message code="message_no_data"/></c:set>
+    <c:set scope="request" var="MESSAGE_DELETE_SUCCESS"><spring:message code="message_delete_success"/></c:set>
+    <c:set scope="request" var="MESSAGE_DELETE_CANCELED"><spring:message code="message_delete_canceled"/></c:set>
 
     <!--Button i18n-->
     <c:set scope="request" var="BUTTON_SAVE"><spring:message code="button_save"/></c:set>
     <c:set scope="request" var="BUTTON_SEARCH"><spring:message code="button_search"/></c:set>
     <c:set scope="request" var="BUTTON_DELETE"><spring:message code="button_delete"/></c:set>
+    <c:set scope="request" var="BUTTON_EDIT"><spring:message code="button_edit"/></c:set>
 
     <!--Label i18n-->
     <c:set scope="request" var="LABEL_NO"><spring:message code="label_no"/></c:set>
@@ -21,6 +24,7 @@
     <c:set scope="request" var="LABEL_AGE"><spring:message code="label_age"/></c:set>
     <c:set scope="request" var="LABEL_SEARCH_WITH_FIRST_NAME"><spring:message code="label_serach_with_first_name"/></c:set>
     <c:set scope="request" var="LABEL_ALERT"><spring:message code="label_alert"/></c:set>
+    <c:set scope="request" var="LABEL_ACTION"><spring:message code="label_action"/></c:set>
 
     <spring:url value="/scripts/app/index.js" 			var="index_js_url" />
     <script src="${index_js_url}" 				type="text/javascript"><!-- required for FF3 and Opera --></script>
@@ -30,7 +34,15 @@
         <![CDATA[
 
             var $MESSAGE_NO_DATA = '${MESSAGE_NO_DATA}';
+            var $MESSAGE_DELETE_SUCCESS = '${MESSAGE_DELETE_SUCCESS}';
+            var $MESSAGE_DELETE_CANCELED = '${MESSAGE_DELETE_CANCELED}';
+
             var $LABEL_ALERT = '${LABEL_ALERT}';
+
+            var $BUTTON_EDIT = '${BUTTON_EDIT}';
+            var $BUTTON_DELETE = '${BUTTON_DELETE}';
+
+
 
         ]]>
     </script>
@@ -68,90 +80,113 @@
 
     </style>
 
-    <div class="control-label paddingTop">
-        <div>
-            <div class="col-sm-4">
-                <!--<div class="input-group">-->
-                    <!--<span class="input-group-addon" id="basic-addon1">@</span>-->
-                    <!--<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"/>-->
-                <!--</div>-->
-
-                <!--<div class="input-group">-->
-                    <!--<input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2"/>-->
-                    <!--<span class="input-group-addon" id="basic-addon2">@example.com</span>-->
-                <!--</div>-->
-
-                Panel for save data
-
-                <!--<div class="input-group">-->
-                    <!--<span class="input-group-addon">$</span>-->
-                    <!--<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"/>-->
-                    <!--<span class="input-group-addon">.00</span>-->
-                <!--</div>-->
-
-                <!--<label for="basic-url">Your vanity URL</label>-->
-                <!--<div class="input-group">-->
-                    <!--<span class="input-group-addon" id="basic-addon3">https://example.com/users/</span>-->
-                    <!--<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>-->
-                <!--</div>-->
-            </div>
-
-            <div class="col-sm-8">
-
-                <div class="centerComponent">
-                    <div class="col-sm-6">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputSearchFirstName" placeholder="${LABEL_SEARCH_WITH_FIRST_NAME}"/>
-                            <span class="input-group-addon btn btn-primary" id="buttonSearchFirstName" style="background-color: #409be4; color: white">${BUTTON_SEARCH}</span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>${LABEL_NO}</th>
-                            <th>${LABEL_FIRST_NAME}</th>
-                            <th>${LABEL_LAST_NAME}</th>
-                            <th>${LABEL_AGE}</th>
-                        </tr>
-                    </thead>
-                    <tbody id="bodyTable">
-                        <tr>
-                            <td colspan="4" style="text-align: center;">${MESSAGE_NO_DATA}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-
-    <!--<div class="modal" id="demo-modal" style="text-align: center">-->
-        <!--<a class="demo-close" onclick="Custombox.modal.close();" href="javascript:void(0);"><i class="fa fa-times"></i></a>-->
-        <!--<button class="btn btn-outline btn-info demo-close-btn" onclick="Custombox.modal.close();" type="button">Close</button>-->
-        <!--<h3>${MESSAGE_NO_DATA}</h3>-->
-    <!--</div>-->
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <!-- Modal Edit -->
+    <div id="editModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <!--<span aria-hidden="true" class="fa fa-times"></span>-->
-                    </button>
+                    <button type="button" class="close" data-dismiss="modal"><span class="fa fa-times"/></button>
+                    <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <p>Some text in the modal.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <div class="control-label paddingTop">
+            <div>
+                <div class="col-sm-4">
+                    <!--<div class="input-group">-->
+                        <!--<span class="input-group-addon" id="basic-addon1">@</span>-->
+                        <!--<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"/>-->
+                    <!--</div>-->
+
+                    <!--<div class="input-group">-->
+                        <!--<input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2"/>-->
+                        <!--<span class="input-group-addon" id="basic-addon2">@example.com</span>-->
+                    <!--</div>-->
+
+                    Panel for save data
+
+                    <!--<div class="input-group">-->
+                        <!--<span class="input-group-addon">$</span>-->
+                        <!--<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"/>-->
+                        <!--<span class="input-group-addon">.00</span>-->
+                    <!--</div>-->
+
+                    <!--<label for="basic-url">Your vanity URL</label>-->
+                    <!--<div class="input-group">-->
+                        <!--<span class="input-group-addon" id="basic-addon3">https://example.com/users/</span>-->
+                        <!--<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>-->
+                    <!--</div>-->
+                </div>
+
+                <div class="col-sm-8">
+
+                    <div class="centerComponent">
+                        <div class="col-sm-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="inputSearchFirstName" placeholder="${LABEL_SEARCH_WITH_FIRST_NAME}"/>
+                                <span class="input-group-addon btn btn-primary" id="buttonSearchFirstName" style="background-color: #409be4; color: white">${BUTTON_SEARCH}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>${LABEL_NO}</th>
+                                <th>${LABEL_FIRST_NAME}</th>
+                                <th>${LABEL_LAST_NAME}</th>
+                                <th>${LABEL_AGE}</th>
+                                <th>${LABEL_ACTION}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bodyTable">
+                            <tr>
+                                <td colspan="5" style="text-align: center;">${MESSAGE_NO_DATA}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <!--<div class="modal" id="demo-modal" style="text-align: center">-->
+            <!--<a class="demo-close" onclick="Custombox.modal.close();" href="javascript:void(0);"><i class="fa fa-times"></i></a>-->
+            <!--<button class="btn btn-outline btn-info demo-close-btn" onclick="Custombox.modal.close();" type="button">Close</button>-->
+            <!--<h3>${MESSAGE_NO_DATA}</h3>-->
+        <!--</div>-->
+        <!-- Modal -->
+
+
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span class="fa fa-times"/></button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
